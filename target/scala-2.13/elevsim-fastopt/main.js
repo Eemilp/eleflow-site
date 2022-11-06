@@ -1641,28 +1641,28 @@ $c_LElevsimApp$.prototype.main__AT__V = (function(args) {
   var pauseButton = document.createElement("button");
   pauseButton.textContent = "Start";
   pauseButton.addEventListener("click", ((arg1$2) => $m_LElevsimApp$().ElevsimApp$$$anonfun$main$8__Lorg_scalajs_dom_MouseEvent__sr_BooleanRef__Lorg_scalajs_dom_Element__O(arg1$2, paused, pauseButton)));
-  var eventButton = document.createElement("button");
-  eventButton.textContent = "Start event";
-  eventButton.addEventListener("click", ((arg1$2$1) => $m_LElevsimApp$().ElevsimApp$$$anonfun$main$10__Lorg_scalajs_dom_MouseEvent__LSimulation__Lorg_scalajs_dom_Element__O(arg1$2$1, sim, eventButton)));
   var customEventButton = document.createElement("button");
-  customEventButton.textContent = "Set custom event";
-  customEventButton.addEventListener("click", ((arg1$2$2) => {
-    sim.setCustomEvent__V()
-  }));
+  customEventButton.textContent = "Start event at top left";
+  customEventButton.addEventListener("click", ((arg1$2$1) => $m_LElevsimApp$().ElevsimApp$$$anonfun$main$10__Lorg_scalajs_dom_MouseEvent__LSimulation__Lorg_scalajs_dom_Element__O(arg1$2$1, sim, customEventButton)));
+  var eventButton = document.createElement("button");
+  eventButton.textContent = "Start two random events";
+  eventButton.addEventListener("click", ((arg1$2$2) => $m_LElevsimApp$().ElevsimApp$$$anonfun$main$12__Lorg_scalajs_dom_MouseEvent__LSimulation__Lorg_scalajs_dom_Element__Lorg_scalajs_dom_Element__O(arg1$2$2, sim, eventButton, customEventButton)));
   var legend = document.createElement("div");
   legend.innerHTML = "<span style=\"color: #FA9494\">\u25a0</span> Point of Interest, <span style=\"color: #CDFCF6\">\u25a0</span> Sleeping cabin, <span style=\"color: #3AB4F2\">\u25a0</span> Elevator";
+  var predText = document.createElement("div");
+  predText.innerHTML = "Additionally a model tries to classify each passenger into a similarly acting group based on their behaviour. Below you can see how the model is learning passenger behaviour in real time with the rising accuracy.";
   var gridStyle = document.createElement("style");
-  var this$7 = sim.LSimulation__f_x;
-  gridStyle.innerHTML = ((".grid-container {   display: grid;" + ((("grid-template-columns: repeat(" + ("" + this$7)) + ",") + $intDiv(100, sim.LSimulation__f_x))) + "%);padding: 10px;}");
+  var this$6 = sim.LSimulation__f_x;
+  gridStyle.innerHTML = ((".grid-container {   display: grid;" + ((("grid-template-columns: repeat(" + ("" + this$6)) + ",") + $intDiv(100, sim.LSimulation__f_x))) + "%);padding: 10px;}");
   var gridItemStyle = document.createElement("style");
   gridItemStyle.innerHTML = ".grid-item {border: 1px solid rgba(0, 0, 0, 0.8);padding: 4px;font-size: 25px;text-align: center;}";
   var grid = document.createElement("div");
   grid.classList.add("grid-container");
   $m_s_package$();
   var end = sim.LSimulation__f_y;
-  var this$10 = new $c_sci_Range$Exclusive(0, end, 1).reverse__sci_Range();
-  if ((!this$10.sci_Range__f_isEmpty)) {
-    var i = this$10.sci_Range__f_start;
+  var this$9 = new $c_sci_Range$Exclusive(0, end, 1).reverse__sci_Range();
+  if ((!this$9.sci_Range__f_isEmpty)) {
+    var i = this$9.sci_Range__f_start;
     while (true) {
       var v1 = i;
       $m_s_package$();
@@ -1680,10 +1680,10 @@ $c_LElevsimApp$.prototype.main__AT__V = (function(args) {
           i$1 = ((1 + i$1) | 0)
         }
       };
-      if ((i === this$10.sci_Range__f_scala$collection$immutable$Range$$lastElement)) {
+      if ((i === this$9.sci_Range__f_scala$collection$immutable$Range$$lastElement)) {
         break
       };
-      i = ((i + this$10.sci_Range__f_step) | 0)
+      i = ((i + this$9.sci_Range__f_step) | 0)
     }
   };
   document.head.appendChild(gridStyle);
@@ -1694,6 +1694,7 @@ $c_LElevsimApp$.prototype.main__AT__V = (function(args) {
   document.body.appendChild(stateText);
   document.body.appendChild(legend);
   document.body.appendChild(grid);
+  document.body.appendChild(predText);
   correctnessTextList.foreach__F1__V(new $c_sjsr_AnonFunction1(((x$4$2) => {
     var x$4 = $as_T2(x$4$2);
     return document.body.appendChild(x$4._2__O())
@@ -1741,13 +1742,24 @@ $c_LElevsimApp$.prototype.ElevsimApp$$$anonfun$main$8__Lorg_scalajs_dom_MouseEve
     return (void 0)
   }
 });
-$c_LElevsimApp$.prototype.ElevsimApp$$$anonfun$main$10__Lorg_scalajs_dom_MouseEvent__LSimulation__Lorg_scalajs_dom_Element__O = (function(e, sim$1, eventButton$1) {
-  sim$1.toggleEvent__V();
-  if (sim$1.LSimulation__f_eventHappening) {
-    eventButton$1.textContent = "Stop event";
+$c_LElevsimApp$.prototype.ElevsimApp$$$anonfun$main$10__Lorg_scalajs_dom_MouseEvent__LSimulation__Lorg_scalajs_dom_Element__O = (function(e, sim$1, customEventButton$1) {
+  sim$1.setCustomEvent__V();
+  if (sim$1.LSimulation__f_customEventEnabled) {
+    customEventButton$1.textContent = "Stop event at top left";
     return (void 0)
   } else {
-    eventButton$1.textContent = "Start event";
+    customEventButton$1.textContent = "Start event at top left";
+    return (void 0)
+  }
+});
+$c_LElevsimApp$.prototype.ElevsimApp$$$anonfun$main$12__Lorg_scalajs_dom_MouseEvent__LSimulation__Lorg_scalajs_dom_Element__Lorg_scalajs_dom_Element__O = (function(e, sim$1, eventButton$1, customEventButton$1) {
+  sim$1.toggleEvent__V();
+  if (sim$1.LSimulation__f_eventHappening) {
+    eventButton$1.textContent = "Clear all events";
+    return (void 0)
+  } else {
+    eventButton$1.textContent = "Start two random events";
+    customEventButton$1.textContent = "Start event at top left";
     return (void 0)
   }
 });
@@ -2055,6 +2067,7 @@ function $c_LSimulation() {
   this.LSimulation__f_events = null;
   this.LSimulation__f_customEventX = 0;
   this.LSimulation__f_customEventFloor = 0;
+  this.LSimulation__f_customEventEnabled = false;
   this.LSimulation__f_x = 28;
   this.LSimulation__f_y = 6;
   var this$4 = $m_s_package$().s_package$__f_Vector;
@@ -2117,7 +2130,8 @@ function $c_LSimulation() {
   var elems$3 = $m_sci_Nil$();
   this.LSimulation__f_events = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems$3);
   this.LSimulation__f_customEventX = 1;
-  this.LSimulation__f_customEventFloor = 5
+  this.LSimulation__f_customEventFloor = 5;
+  this.LSimulation__f_customEventEnabled = false
 }
 $c_LSimulation.prototype = new $h_O();
 $c_LSimulation.prototype.constructor = $c_LSimulation;
@@ -2175,29 +2189,104 @@ $c_LSimulation.prototype.update__V = (function() {
   })))
 });
 $c_LSimulation.prototype.setCustomEvent__V = (function() {
-  var this$2 = this.LSimulation__f_events;
-  var this$1 = this.LSimulation__f_ship.LShip__f_places;
-  _return: {
-    var it = this$1.iterator__sc_Iterator();
-    while (it.hasNext__Z()) {
-      var a = it.next__O();
-      var p = $as_LPlace(a);
-      if (((p.LPlace__f_x === this.LSimulation__f_customEventX) && (p.LPlace__f_floor === this.LSimulation__f_customEventFloor))) {
-        var $$x1 = new $c_s_Some(a);
-        break _return
+  if ((!this.LSimulation__f_customEventEnabled)) {
+    var this$2 = this.LSimulation__f_events;
+    var this$1 = this.LSimulation__f_ship.LShip__f_places;
+    _return: {
+      var it = this$1.iterator__sc_Iterator();
+      while (it.hasNext__Z()) {
+        var a = it.next__O();
+        var p = $as_LPlace(a);
+        if (((p.LPlace__f_x === this.LSimulation__f_customEventX) && (p.LPlace__f_floor === this.LSimulation__f_customEventFloor))) {
+          var $$x1 = new $c_s_Some(a);
+          break _return
+        }
+      };
+      var $$x1 = $m_s_None$()
+    };
+    var elem = $ct_T2__O__O__(new $c_T2(), $$x1.get__O(), 100.0);
+    this.LSimulation__f_events = $as_sci_List($f_sc_StrictOptimizedSeqOps__appended__O__O(this$2, elem));
+    this.LSimulation__f_customEventEnabled = true
+  } else {
+    var this$3 = this.LSimulation__f_events;
+    var f = ((e$2) => {
+      var e = $as_T2(e$2);
+      return (($as_LPlace(e._1__O()).LPlace__f_x !== this.LSimulation__f_customEventX) && ($as_LPlace(e._1__O()).LPlace__f_floor !== this.LSimulation__f_customEventFloor))
+    });
+    var l = this$3;
+    block: {
+      var result;
+      while (true) {
+        if (l.isEmpty__Z()) {
+          var result = $m_sci_Nil$();
+          break
+        } else {
+          var h = l.head__O();
+          var t = $as_sci_List(l.tail__O());
+          if (($uZ(f(h)) === false)) {
+            l = t;
+            continue
+          };
+          var start = l;
+          var remaining = t;
+          while (true) {
+            if (remaining.isEmpty__Z()) {
+              var result = start;
+              break block
+            } else {
+              var x = remaining.head__O();
+              if (($uZ(f(x)) !== false)) {
+                remaining = $as_sci_List(remaining.tail__O());
+                continue
+              };
+              var firstMiss = remaining;
+              var newHead = new $c_sci_$colon$colon(start.head__O(), $m_sci_Nil$());
+              var toProcess = $as_sci_List(start.tail__O());
+              var currentLast = newHead;
+              while ((toProcess !== firstMiss)) {
+                var newElem = new $c_sci_$colon$colon(toProcess.head__O(), $m_sci_Nil$());
+                currentLast.sci_$colon$colon__f_next = newElem;
+                currentLast = newElem;
+                toProcess = $as_sci_List(toProcess.tail__O())
+              };
+              var next = $as_sci_List(firstMiss.tail__O());
+              var nextToCopy = next;
+              while ((!next.isEmpty__Z())) {
+                var head = next.head__O();
+                if (($uZ(f(head)) !== false)) {
+                  next = $as_sci_List(next.tail__O())
+                } else {
+                  while ((nextToCopy !== next)) {
+                    var newElem$2 = new $c_sci_$colon$colon(nextToCopy.head__O(), $m_sci_Nil$());
+                    currentLast.sci_$colon$colon__f_next = newElem$2;
+                    currentLast = newElem$2;
+                    nextToCopy = $as_sci_List(nextToCopy.tail__O())
+                  };
+                  nextToCopy = $as_sci_List(next.tail__O());
+                  next = $as_sci_List(next.tail__O())
+                }
+              };
+              if ((!nextToCopy.isEmpty__Z())) {
+                currentLast.sci_$colon$colon__f_next = nextToCopy
+              };
+              var result = newHead;
+              break block
+            }
+          }
+        }
       }
     };
-    var $$x1 = $m_s_None$()
-  };
-  var elem = $ct_T2__O__O__(new $c_T2(), $$x1.get__O(), 100.0);
-  this.LSimulation__f_events = $as_sci_List($f_sc_StrictOptimizedSeqOps__appended__O__O(this$2, elem))
+    this.LSimulation__f_events = result;
+    this.LSimulation__f_customEventEnabled = false
+  }
 });
 $c_LSimulation.prototype.toggleEvent__V = (function() {
   if (this.LSimulation__f_eventHappening) {
     $m_s_package$();
     var elems = $m_sci_Nil$();
     this.LSimulation__f_events = $m_sci_Nil$().prependedAll__sc_IterableOnce__sci_List(elems);
-    this.LSimulation__f_eventHappening = false
+    this.LSimulation__f_eventHappening = false;
+    this.LSimulation__f_customEventEnabled = false
   } else {
     var $$x2 = this.LSimulation__f_randGen;
     var $$x1 = this.LSimulation__f_ship.LShip__f_places;
