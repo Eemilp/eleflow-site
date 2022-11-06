@@ -9713,11 +9713,11 @@ function $c_LPersonType$() {
   this.LPersonType$__f_rand = null;
   $ct_s_Enumeration__I__(this, 0);
   $n_LPersonType$ = this;
-  var name = (((this.s_Enumeration__f_nextName !== null) && this.s_Enumeration__f_nextName.hasNext__Z()) ? $as_T(this.s_Enumeration__f_nextName.next__O()) : "Sleeper");
+  var name = (((this.s_Enumeration__f_nextName !== null) && this.s_Enumeration__f_nextName.hasNext__Z()) ? $as_T(this.s_Enumeration__f_nextName.next__O()) : "Partiers");
   new $c_s_Enumeration$Val(this, 0, name);
-  var name$1 = (((this.s_Enumeration__f_nextName !== null) && this.s_Enumeration__f_nextName.hasNext__Z()) ? $as_T(this.s_Enumeration__f_nextName.next__O()) : "Partygoer");
+  var name$1 = (((this.s_Enumeration__f_nextName !== null) && this.s_Enumeration__f_nextName.hasNext__Z()) ? $as_T(this.s_Enumeration__f_nextName.next__O()) : "Shoppers");
   new $c_s_Enumeration$Val(this, 1, name$1);
-  var name$2 = (((this.s_Enumeration__f_nextName !== null) && this.s_Enumeration__f_nextName.hasNext__Z()) ? $as_T(this.s_Enumeration__f_nextName.next__O()) : "Shopper");
+  var name$2 = (((this.s_Enumeration__f_nextName !== null) && this.s_Enumeration__f_nextName.hasNext__Z()) ? $as_T(this.s_Enumeration__f_nextName.next__O()) : "Leisurers");
   new $c_s_Enumeration$Val(this, 2, name$2);
   this.LPersonType$__f_rand = $ct_s_util_Random__(new $c_s_util_Random())
 }
